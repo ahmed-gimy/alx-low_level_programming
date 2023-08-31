@@ -9,18 +9,23 @@
 
 void print_binary(unsigned long int n)
 {
-	int bit = sizeof(n) * 8, p = 0;
+	unsigned long int tmp;
+	int shifts;
 
-	while (bit)
+	if (n == 0)
 	{
-		if (n & 1L << --bit)
-		{
-			_putchar('1');
-			p++;
-		}
-		else if (p)
-			_putchar('0');
+		printf("0");
+		return;
 	}
-	if (!p)
-		_putchar('1');
+
+	for (tmp = n, shifts = 0; (tmp >>= 1) > 0; shifts++)
+		;
+
+	for (; shifts >= 0; shifts--)
+	{
+		if ((n >> shifts) & 1)
+			printf("1");
+		else
+			printf("0");
+	}
 }
